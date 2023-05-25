@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Javascript Calculator</title>
+	<!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <script>
+
+    	let strEquation = '';
+    	let dotCondition = true;
+    	let minusCondition = true;
+
+    	function reset() {
+    		const displayReset = document.getElementById("display");
+    		strEquation = displayReset.value = '0';
+    		dotCondition = true;
+
+    	}
+
+    	function inputDisplay(value = '0') {
+
+		  const display = document.getElementById('display');
+		  const displayLastElement = strEquation[strEquation.length-1]
+
+		  	if(value === '.') {
+		  		if(dotCondition) {
+
+		  			strEquation = display.value += value;
+		  			dotCondition = false;
+
+		  		} else {
+		  			display.value = strEquation;
+		  		}
+
+		  	}else if(value ==='+' || value === '-' || value ==='*' || value === '/') {
+
+				dotCondition = true;
+
+
+				if (value === displayLastElement) {
+					display.value = strEquation;
+					console.log("não aceita ser igual ao ultimo sinal")
+
+				}else if(displayLastElement === '+' || displayLastElement === '-' || displayLastElement === '*' || displayLastElement === '/') {
+
+					strEquation = display.value = strEquation.slice(0, strEquation.length - 1) + value;
+					console.log("está trocando os sinais caso já exista um")
+
+				}else {
+					strEquation = display.value += value;
+					console.log("se não existir nenhum sinal para substituir ou se não estiver repetindo em sequencia")
+
+				}
+
+
+			}else if(display.value === '0') {
+		  		display.value = value;
+
+		  	}else{
+		  		strEquation = display.value += value;
+		  }
+
+		}
+
+		function result() {
+
+			const result = eval(strEquation);
+			document.getElementById('display').value = result;
+
+
+
+		}
+
+    </script>
+</head>
+<body>
+	<div class="container" id="calculator">
+		<h1 class="text-center">Javascript Calculator</h1>
+		<div class="card">
+			<div class="card-body my-3">
+				<div class="text-center h1" id="VER SE É NECESSÁRIO">
+					<input type="text" id="display" value="">
+				</div>
+			</div>
+		</div>
+		<div class="btn-light btn-lg" id="buttons">
+
+			<button class="btn-center drum-pad btn-toggle btn-primary btn-lg" onclick="result()" id="equals">
+				=
+
+			</button>
+			<button class="drum-pad text-center btn-toggle btn-primary btn-lg" onclick="inputDisplay('0')" id="zero">
+				0
+
+			</button>
+			<button class="drum-pad btn-toggle btn-primary btn-lg" onclick="inputDisplay('1')" id="one">
+				1
+
+			</button>
+			<button class="drum-pad btn-toggle btn-primary btn-lg" onclick="inputDisplay('2')" id="two">
+				2
+
+			</button>
+			<button class="drum-pad btn-toggle btn-primary btn-lg" onclick="inputDisplay('3')" id="three">
+				3
+
+			</button>
+			<button class="drum-pad btn-toggle btn-primary btn-lg" onclick="inputDisplay('4')" id="four">
+				4
+
+			</button>
+			<button class="drum-pad btn-toggle btn-primary btn-lg" onclick="inputDisplay('5')" id="five">
+				5
+
+			</button>
+			<button class="drum-pad btn-toggle btn-primary btn-lg" onclick="inputDisplay('6')" id="six">
+				6
+
+			</button>
+			<button class="drum-pad btn-toggle btn-primary btn-lg" onclick="inputDisplay('7')" id="seven">
+				7
+			</button>
+			<button class="drum-pad btn-toggle btn-primary btn-lg" onclick="inputDisplay('8')" id="eight">
+				8
+			</button>
+			<button class="drum-pad btn-toggle btn-primary btn-lg" onclick="inputDisplay('9')" id="nine">
+				9
+			</button>
+			<button class="drum-pad btn-toggle btn-primary btn-lg" onclick="inputDisplay('+')" id="add">
+				+
+
+			</button>
+			<button class="drum-pad btn-toggle btn-primary btn-lg" onclick="inputDisplay('-')" id="subtract">
+				-
+
+			</button>
+			<button class="drum-pad btn-toggle btn-primary btn-lg" onclick="inputDisplay('*')" id="multiply">
+				*
+			</button>
+			<button class="drum-pad btn-toggle btn-primary btn-lg" onclick="inputDisplay('/')" id="divide">
+				/
+			</button>
+			<button class="drum-pad btn-toggle btn-primary btn-lg" onclick="inputDisplay('.')" id="decimal">
+				.
+			</button>
+			<button class="drum-pad btn-toggle btn-primary btn-lg" onclick="reset()" id="clear">
+				AC
+			</button>
+
+		</div>
+	</div>
+
+	<!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.6/dist/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+</body>
+</html>
